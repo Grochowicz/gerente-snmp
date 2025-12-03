@@ -1,0 +1,2 @@
+id_switch,numero_portas,ip,mac,versao_snmp,porta_uplink,chave_community,protocolo_autenticacao,protocolo_criptografia,chave_autenticacao,chave_privada,nivel_seguranca
+1,24,10.90.90.90,0:11:22:33:44:55,2,24,public,,,,,

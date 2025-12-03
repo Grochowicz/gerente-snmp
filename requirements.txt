@@ -1,0 +1,6 @@
+easysnmp
+getmac
+python-crontab
+psycopg2
+apscheduler
+streamlit

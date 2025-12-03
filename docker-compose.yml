@@ -1,0 +1,8 @@
+# docker-compose configuration removed
+# This project no longer requires a PostgreSQL service by default because
+# persistence is done via CSV files under `app/data`.
+# If you still need a DB service for other purposes, add your own
+# `docker-compose.yml` with the services you require.
+      POSTGRES_USER: admin
+
+      POSTGRES_PASSWORD: admin
