@@ -34,16 +34,16 @@ def main():
         return
 
     st.sidebar.success("Autenticado")
-    # Painel de configuração: escolher máquina do professor e quais máquinas têm acesso
+    # escolher máquina do professor e quais máquinas têm acesso
     st.sidebar.markdown("---")
     st.sidebar.header("Configuração de Acesso")
     try:
         maquinas_cfg = storage.load_all("maquinas")
-        # carregar conexões e switches para uso posterior
+        # carregar conexões e switches
         conex = storage.load_all('maquinas_conectadas_switch')
         switches = storage.load_all('switches')
 
-        # Função: sincroniza automaticamente conexões com switches e atualiza o CSV
+        # sincroniza automaticamente conexões com switches e atualiza o CSV
         def auto_sync_switches():
             switches_local = storage.load_all('switches')
             maquinas_local = storage.load_all('maquinas')
@@ -145,7 +145,7 @@ def main():
 
             return updated, added, errors_local
 
-        # Gera snapshots em `status_portas.csv` consultando todos switches (melhor esforço)
+        # Gera snapshots em status_portas.csv consultando todos switches
         def generate_status_portas_from_switches():
             switches_local = storage.load_all('switches')
             total = 0
@@ -163,7 +163,7 @@ def main():
                 except Exception:
                     continue
 
-            # coletar globalmente todas as linhas que serão salvas (uma por porta relevante)
+            # coletar globalmente todas as linhas que serão salvas 
             global_rows = []
 
             for sw in switches_local:
@@ -257,7 +257,7 @@ def main():
                 errors_local.append(f"Falha gravar snapshots (save_all) para status_portas: {e}")
 
             return total, errors_local
-        # Sincroniza `maquinas_conectadas_switch` e `maquinas` a partir do arquivo `status_portas`
+        # Sincroniza maquinas_conectadas_switch e maquinas a partir do arquivo `status_portas`
         def sync_csvs_from_status_portas():
             # carregar snapshots (estado atual por porta) e indexar por switch+port
             snaps = storage.load_all('status_portas')
@@ -622,7 +622,7 @@ def main():
 
                     st.write(f"Switch: {sw.get('ip')} (id {sw.get('id_switch')}) — porta registrada: {porta_reg} — status CSV: {status_csv}")
 
-                    # preferir usar dados gravados em `status_portas.csv` (mais estáveis)
+                    # preferir usar dados gravados em status_portas.csv
                     try:
                         snaps = storage.load_all('status_portas')
                         # buscar snapshots do switch atual (por id_switch ou ip)
