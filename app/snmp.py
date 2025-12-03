@@ -17,7 +17,7 @@ MIB_PORT_STATUS = {
 
 class SNMPManager:
     def __init__(self, host: str = None, community_read: str = None, community_write: str = None, version: int = 2, timeout: int = 2, retries: int = 1, hostname: str = None, community: str = None):
-        # compatibilidade: aceitar `hostname`/`community` alternativos
+        # compatibilidade: aceitar hostname/community alternativos
         if hostname and not host:
             host = hostname
         if community and not community_read:
@@ -189,7 +189,6 @@ class SNMPManager:
                 return False
         return True
 
-    # Métodos com nomes em português compatíveis com rotas existentes
     def alterar_estado_porta(self, porta: int, estado: int) -> bool:
         """Compatibilidade: recebe porta e estado (1 para ligado/enable, 2 para desligado/disable).
         Retorna True se teve sucesso."""
